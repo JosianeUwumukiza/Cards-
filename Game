@@ -1,0 +1,19 @@
+
+/**
+ * Game class tests the Deck class
+ *
+ * @author Josiane Uwumukiza
+ * @version 6th October, 2023
+ */
+public class Game
+{
+    public static void main(){
+        Deck deck1 = new Deck();
+        System.out.println("Original deck of cards: \n"+deck1);//prints the original deck of cards
+        deck1.cut();
+        System.out.println("After cutting at a random number: \n"+deck1);// prints the cut deck of cards
+        deck1.shuffle();
+        System.out.println("After shuffling the cards in the deck: \n"+deck1);//prints the shuffled deck of cards
+        
+    }
+}
