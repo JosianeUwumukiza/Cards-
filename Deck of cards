@@ -1,0 +1,92 @@
+import java.util.Random;
+/**
+ * A deck of Cards
+ *
+ * @author Josiane Uwumukiza
+ * @version October 4th 2023
+ */
+public class Deck
+{
+    // instance variables 
+    private int count; //keeps the count of cards in a deck
+    private final int cardsNumber=52;
+    private Card[] cardsCollection;
+
+    /**
+     * Constructor for objects of class Deck
+     */
+    public Deck()
+    {
+        // initialise instance variables
+        count=52;
+        String[] suits={"Hearts","Diamonds","Spades","Clubs"};
+        cardsCollection=new Card[52];
+        int numCards=0;
+        //iterate through suits
+        for (int i=0; i<suits.length;i++){
+            //iterate through card numbers
+            for (int j=1; j<=13;j++){
+                cardsCollection[numCards]=new Card(suits[i],j);
+                numCards+=1; 
+            }
+        }
+    }
+
+    /**creates the string representation of our deck of cards
+     * @return CardsInDeck - the String representation of the deck of cards
+     */
+    public String toString()
+    {
+        // put your code here
+        String CardsInDeck="";
+        for(int numCards=0; numCards<count; numCards++)
+            CardsInDeck+=cardsCollection[numCards]+"\n";
+        return CardsInDeck;
+    }
+
+    /** Cuts the cards in a deck and rearrange them so that the first half become the last half
+     * 
+     */
+    public void cut(){
+        Random generator = new Random();
+        int num= generator.nextInt(52);
+        Card [] tempPile=new Card[52];
+        int tempCount=0;
+        //places in the new array the second half of cards
+        for(int i=num; i<52;i++){
+            tempPile[tempCount]=cardsCollection[i];
+            tempCount+=1;
+        }
+        //Places in the new array the first half of cards
+        for (int i=0; i<num; i++){
+            tempPile[tempCount]=cardsCollection[i];
+            tempCount+=1;
+        }
+        cardsCollection=tempPile;
+    }
+    
+
+    /**
+     *Shuffles the cards in a deck- randomly mixes the cards 
+     */
+    public void shuffle(){
+        Card[] tempPile=new Card[52];
+        int tempCount=0;
+        while (true){
+            Random generator = new Random();
+            int num = generator.nextInt(52-(tempCount));
+            //a piece of code that takes the random card into a new pile
+            tempPile[tempCount]=cardsCollection[num];
+            tempCount+=1;
+            //delete the copied object and move up objects in the cardsCollection
+            for(int i=num+1; i<cardsCollection.length;i++){
+                cardsCollection[i-1]=cardsCollection[i];
+            }
+            //until when there is zero cards remaining in the collection
+            if (tempCount==52){
+                break;
+            }
+        }
+        cardsCollection=tempPile;
+    }
+}
